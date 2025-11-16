@@ -81,13 +81,31 @@ export default function Gauge({ quality, total, ok, ng }) {
       </div>
 
       {/* CENTER: Total Count */}
-      <div className="border border-gray-300 rounded-xl bg-white p-6 flex flex-col">
-        <p className="text-lg font-semibold text-gray-700 mb-2">Total Count</p>
+      <div className="border border-gray-300 rounded-xl bg-white p-6 flex flex-col items-center">
 
-        <div className="flex-grow flex items-center justify-center">
-          <p className="text-6xl font-bold">{total}</p>
+        {/* Total Count (Row 1) */}
+        <p className="text-lg font-semibold text-gray-700 mb-2">Total Count</p>
+        <p className="text-6xl font-bold mb-6">{total}</p>
+
+        {/* Row 2: OK + NG side by side */}
+        <div className="w-full flex justify-center gap-20">
+
+          {/* OK */}
+          <div className="flex flex-col items-center">
+            <p className="text-lg font-semibold text-gray-700">OK</p>
+            <p className="text-5xl font-bold text-green-600">{ok}</p>
+          </div>
+
+          {/* NG */}
+          <div className="flex flex-col items-center">
+            <p className="text-lg font-semibold text-gray-700">NG</p>
+            <p className="text-5xl font-bold text-red-600">{ng}</p>
+          </div>
+
         </div>
+
       </div>
+
 
       {/* RIGHT: OK/NG */}
       <div className="border border-gray-300 rounded-xl bg-white p-6 flex flex-col justify-start">
