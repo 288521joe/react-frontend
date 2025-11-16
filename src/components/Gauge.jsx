@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Gauge({ quality, total, ok, ng }) {
   // sanitize inputs
@@ -13,6 +15,7 @@ export default function Gauge({ quality, total, ok, ng }) {
 
   const [anim, setAnim] = useState(0);
   const animRef = useRef(null);
+  const navigate = useNavigate();
 
   // Smooth animation
   useEffect(() => {
@@ -109,16 +112,22 @@ export default function Gauge({ quality, total, ok, ng }) {
 
         {/* RIGHT: Error parts */}
         <div className="rounded-xl bg-white p-3 flex flex-col justify-center items-center border border-gray-200 shadow-sm">
+          
           <div className="mb-8 text-center">
             <p className="text-lg font-semibold text-gray-700">Error parts</p>
             <p className="text-6xl font-bold text-red-600">{ok}</p>
           </div>
 
-          <div className="text-center">
-            <p className="text-lg font-semibold text-gray-700">NG</p>
-            <p className="text-6xl font-bold">{ng}</p>
-          </div>
+          <button
+            onClick={() => navigate("/error-list")}
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+          >
+            Error list
+          </button>
+
         </div>
+
+
 
       </div>
 

@@ -37,10 +37,7 @@ export default function App() {
     return () => clearInterval(t);
   }, []);
 
-
-
   const navigate = useNavigate();
-
 
   const [askPasswordFor, setAskPasswordFor] = useState(null);
 

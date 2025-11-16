@@ -14,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/results" element={<ResultsPage />} />
       <Route path="/capability" element={<CapabilityPage />} />
       <Route path="/models" element={<ModelPage />} />
+      <Route path="/error-list" element={<ErrorList />} />
     </Routes>
   </BrowserRouter>
 );
