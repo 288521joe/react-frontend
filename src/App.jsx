@@ -39,6 +39,9 @@ export default function App() {
 
   const navigate = useNavigate();
 
+  const [showErrorList, setShowErrorList] = useState(false);
+
+
   const [askPasswordFor, setAskPasswordFor] = useState(null);
 
   // Validate pin

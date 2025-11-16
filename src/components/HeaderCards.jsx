@@ -2,7 +2,7 @@ import Card from "./Card";
 
 export default function HeaderCards({ currentModel, plcSignal }) {
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-5 gap-4">
 
       {/* Card 1: Machine */}
       <Card title="M/C">
@@ -15,7 +15,7 @@ export default function HeaderCards({ currentModel, plcSignal }) {
       </Card>
 
       {/* Card 3: Date & Time — NO TITLE */}
-      <div className="bg-white p-4 rounded-xl shadow text-center">
+      <div className="bg-white text-1xl p-4 rounded-xl shadow text-center">
         {new Date().toLocaleDateString()} <br />
         {new Date().toLocaleTimeString()}
       </div>

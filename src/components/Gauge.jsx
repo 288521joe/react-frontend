@@ -113,14 +113,14 @@ export default function Gauge({ quality, total, ok, ng }) {
         {/* RIGHT: Error parts */}
         <div className="rounded-xl bg-white p-3 flex flex-col justify-center items-center border border-gray-200 shadow-sm">
           
-          <div className="mb-8 text-center">
-            <p className="text-lg font-semibold text-gray-700">Error parts</p>
-            <p className="text-6xl font-bold text-red-600">{ok}</p>
+          <div className="mb-4 text-center">
+            <p className="text-lg font-semibold text-gray-700">QR Error Count</p>
+            <p className="text-6xl font-bold text-yellow-600">{ok}</p>
           </div>
 
           <button
             onClick={() => navigate("/error-list")}
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+            className="text-2xl font-bold mt-4 px-20 py-4 bg-gray-300 text-white rounded-lg shadow hover:bg-slate-700 transition"
           >
             Error list
           </button>

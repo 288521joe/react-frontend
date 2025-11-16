@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import ResultsPage from "./components/ResultsPage.jsx";
 import CapabilityPage from "./components/CapabilityPage.jsx";
 import ModelPage from "./components/ModelPage.jsx";
+import ErrorList from "./components/ErrorList.jsx";  // ← You missed this
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
