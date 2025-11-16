@@ -80,28 +80,32 @@ export default function App() {
       {/* First Row */}
       <HeaderCards currentModel={currentModel} plcSignal={plcSignal} />
 
-      {/* Second Row — Gauge replaces Matrix */}
-      <div className="grid grid-cols-4 gap-4">
-
-        <div className="col-span-3 flex justify-center items-center bg-white rounded-xl shadow p-2">
+      <div className="flex gap-4 mt-4">
+        <div className="flex-[3] bg-white rounded-xl p-5 border border-gray-300">
           <Gauge value={status === "OK" ? 80 : 20} />
         </div>
 
-        <StatusBlock status={status} />
+        <div className="flex-[1] flex">
+          <StatusBlock status={status} />
+        </div>
+      </div>
 
+
+
+      {/* Third Row — combined measurement */}
+      <div className="flex gap-4 mt-4">
+
+        {/* CombinedMeasurementRow — takes 3/4 width */}
+        <div className="flex-[3] bg-white rounded-xl shadow p-2 flex flex-col">
+          <CombinedMeasurementRow />
         </div>
 
-        {/* Third Row — combined measurement */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
-
-          <div className="col-span-3 bg-white rounded-xl shadow p-4">
-            <CombinedMeasurementRow />
-          </div>
-
-
+        {/* LotCard — takes 1/4 width, same height because parent is flex */}
+        <div className="flex-[1] flex">
           <LotCard />
-
         </div>
+
+      </div>
 
 
 

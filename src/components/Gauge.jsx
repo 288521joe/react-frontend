@@ -34,94 +34,93 @@ export default function Gauge({ quality, total, ok, ng }) {
   const progress = (anim / 100) * circumference;
 
   return (
-    <div className="grid grid-cols-3 gap-4 mt-4 ">
+    <div className="w-full h-full bg-white rounded-xl flex flex-col">
 
-      {/* LEFT: Responsive Gauge */}
-      <div className="border border-gray-300 rounded-xl bg-white p-2 flex flex-col justify-center items-center h-full">
+      {/* 3 sections aligned like other cards */}
+      <div className="grid grid-cols-3 gap-4 h-full">
 
-        <p className="text-lg font-semibold text-gray-700 mb-2">Quality</p>
+        {/* LEFT: Responsive Gauge */}
+        <div className="relative rounded-xl bg-white p-2 flex flex-col  border border-gray-200 ">
 
-        <div className="w-full max-w-[350px] mx-auto relative aspect-[1.7/1]">
+          {/* Left–aligned text overlay */}
+          <p className="absolute top-3 left-4 text-lg font-semibold text-gray-700 z-10">
+            Quality
+          </p>
 
-          <svg className="w-full h-full" viewBox="0 0 330 200" preserveAspectRatio="xMidYMid meet">
-            <g transform="translate(165,140)">
+          {/* Full-size gauge */}
+          <div className="w-full h-full relative flex items-center justify-center">
 
-              {/* Background arc */}
-              <path
-                d="M -120 0 A 120 120 0 0 1 120 0"
-                fill="none"
-                stroke="#e5e7eb"
-                strokeWidth={stroke}
-                strokeLinecap="round"
-              />
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 330 200"
+              preserveAspectRatio="none"
+            >
+              <g transform="translate(165,140)">
+                {/* Background arc */}
+                <path
+                  d="M -120 0 A 120 120 0 0 1 120 0"
+                  fill="none"
+                  stroke="#e5e7eb"
+                  strokeWidth={stroke}
+                  strokeLinecap="round"
+                />
 
-              {/* Animated arc */}
-              <path
-                d="M -120 0 A 120 120 0 0 1 120 0"
-                fill="none"
-                stroke="#facc15"
-                strokeWidth={stroke}
-                strokeLinecap="round"
-                strokeDasharray={`${progress} ${circumference}`}
-                style={{ transition: "stroke-dasharray 0.25s linear" }}
-              />
+                {/* Animated arc */}
+                <path
+                  d="M -120 0 A 120 120 0 0 1 120 0"
+                  fill="none"
+                  stroke="#facc15"
+                  strokeWidth={stroke}
+                  strokeLinecap="round"
+                  strokeDasharray={`${progress} ${circumference}`}
+                  style={{ transition: "stroke-dasharray 0.25s linear" }}
+                />
+              </g>
+            </svg>
 
-            </g>
-          </svg>
+            {/* Labels 0–100 */}
+            <p className="absolute bottom-1 left-8 text-gray-600 text-base font-semibold">0</p>
+            <p className="absolute bottom-1 right-7 text-gray-600 text-base font-semibold">100</p>
 
-          {/* 0 and 100 labels */}
-          <p className="absolute bottom-1 left-4 text-gray-600 text-base font-semibold">0</p>
-          <p className="absolute bottom-1 right-4 text-gray-600 text-base font-semibold">100</p>
-
-          {/* Center Value */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <p className="text-5xl md:text-6xl font-bold">{Math.round(anim)}%</p>
+            {/* Center animated value */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-5xl md:text-6xl font-bold">{Math.round(anim)}%</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* CENTER: Total Count */}
-      <div className="border border-gray-300 rounded-xl bg-white p-2 flex flex-col justify-center items-center">
+        {/* CENTER: Total Count */}
+        <div className="rounded-xl bg-white p-3 flex flex-col justify-center items-center border border-gray-200 shadow-sm">
+          <p className="text-lg font-semibold text-gray-700 mb-2">Total Count</p>
+          <p className="text-6xl font-bold mb-6">{total}</p>
 
-        {/* Total Count (Row 1) */}
-        <p className="text-lg font-semibold text-gray-700 mb-2">Total Count</p>
-        <p className="text-6xl font-bold mb-6">{total}</p>
+          <div className="w-full flex justify-center gap-20">
+            <div className="flex flex-col items-center">
+              <p className="text-lg font-semibold text-gray-700">OK</p>
+              <p className="text-6xl font-bold text-green-600">{ok}</p>
+            </div>
 
-        {/* Row 2: OK + NG side by side */}
-        <div className="w-full flex justify-center gap-20">
+            <div className="flex flex-col items-center">
+              <p className="text-lg font-semibold text-gray-700">NG</p>
+              <p className="text-6xl font-bold text-red-600">{ng}</p>
+            </div>
+          </div>
+        </div>
 
-          {/* OK */}
-          <div className="flex flex-col items-center">
-            <p className="text-lg font-semibold text-gray-700">OK</p>
-            <p className="text-6xl font-bold text-green-600">{ok}</p>
+        {/* RIGHT: Error parts */}
+        <div className="rounded-xl bg-white p-3 flex flex-col justify-center items-center border border-gray-200 shadow-sm">
+          <div className="mb-8 text-center">
+            <p className="text-lg font-semibold text-gray-700">Error parts</p>
+            <p className="text-6xl font-bold text-red-600">{ok}</p>
           </div>
 
-          {/* NG */}
-          <div className="flex flex-col items-center">
+          <div className="text-center">
             <p className="text-lg font-semibold text-gray-700">NG</p>
-            <p className="text-6xl font-bold text-red-600">{ng}</p>
+            <p className="text-6xl font-bold">{ng}</p>
           </div>
-
         </div>
 
       </div>
-
-
-      {/* RIGHT: OK/NG */}
-      <div className="border border-gray-300 rounded-xl bg-white p-2 flex flex-col justify-center items-center h-full">
-
-        <div className="mb-8 text-center">
-          <p className="text-lg font-semibold text-gray-700">Error parts</p>
-          <p className="text-6xl font-bold text-red-600">{ok}</p>
-        </div>
-
-        <div className="text-center">
-          <p className="text-lg font-semibold text-gray-700">NG</p>
-          <p className="text-6xl font-bold text-black-600">{ng}</p>
-        </div>
-
-      </div>
-
 
     </div>
   );

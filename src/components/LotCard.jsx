@@ -2,8 +2,8 @@ import React from "react";
 
 export default function LotCard() {
   return (
-    <div className="basis-[25.5%] border rounded-xl p-5 bg-white shadow-md flex flex-col">
-      
+    <div className="w-full h-full border rounded-xl p-5 bg-white shadow-md flex flex-col">
+
       <div className="text-xl font-semibold mb-2 border p-2 text-center rounded">
         LOT mark code
       </div>
