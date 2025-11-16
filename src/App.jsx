@@ -12,7 +12,8 @@ import ResultTable from "./components/ResultTable";
 import CapabilityReport from "./components/CapabilityReport";
 import PasswordPrompt from "./components/PasswordPrompt";
 import { useNavigate } from "react-router-dom";
-
+import CombinedMeasurementRow from "./components/CombinedMeasurementRow";
+import LotCard from "./components/LotCard";
 
 export default function App() {
 
@@ -74,33 +75,35 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 space-y-6">
+    <div className="min-h-screen bg-gray-100 p-4 space-y-4">
 
       {/* First Row */}
       <HeaderCards currentModel={currentModel} plcSignal={plcSignal} />
 
       {/* Second Row — Gauge replaces Matrix */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="col-span-3 flex justify-center items-center bg-white rounded-xl shadow p-4">
+
+        <div className="col-span-3 flex justify-center items-center bg-white rounded-xl shadow p-2">
           <Gauge value={status === "OK" ? 80 : 20} />
         </div>
 
         <StatusBlock status={status} />
-      </div>
 
-      {/* Third Row */}
-      <MeasurementsRow
-        diameter1={diameter1}
-        diameter2={diameter2}
-        runout1={runout1}
-        runout2={runout2}
-      />
+        </div>
 
-      {/* Fourth Row */}
-      <div className="grid grid-cols-2 gap-4">
-        <LineChart label="Diameter 1" />
-        <LineChart label="Diameter 2" />
-      </div>
+        {/* Third Row — combined measurement */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+
+          <div className="col-span-3 bg-white rounded-xl shadow p-4">
+            <CombinedMeasurementRow />
+          </div>
+
+
+          <LotCard />
+
+        </div>
+
+
 
       {/* Footer */}
       <Footer

@@ -1,51 +1,38 @@
 import {
-  Chart as ChartJS,
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
+  LineChart as ReLineChart,
+  Line,
+  XAxis,
+  YAxis,
   Tooltip,
-  Legend
-} from "chart.js";
+  ResponsiveContainer,
+} from "recharts";
 
-import { Line } from "react-chartjs-2";
-
-// Register chart components
-ChartJS.register(
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Tooltip,
-  Legend
-);
-
-export default function LineChart({ label }) {
-  const data = {
-    labels: ["1", "2", "3", "4", "5"],
-    datasets: [
-      {
-        label,
-        data: [10, 12, 11, 14, 13],
-        borderWidth: 2,
-        borderColor: "rgba(0, 120, 255, 1)",
-        tension: 0.3,
-        pointRadius: 0
-      }
-    ]
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false }
-    }
-  };
+export default function LineChart() {
+  // Dummy data — replace with your live data
+  const data = [
+    { x: 1, y: 4 },
+    { x: 2, y: 5 },
+    { x: 3, y: 3 },
+    { x: 4, y: 6 },
+    { x: 5, y: 4 },
+  ];
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow h-[300px]">
-      <Line data={data} options={options} />
+    <div className="w-full h-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <ReLineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+          <XAxis dataKey="x" hide />
+          <YAxis hide />
+          <Tooltip />
+          <Line
+            type="monotone"
+            dataKey="y"
+            stroke="#2563eb"
+            strokeWidth={3}
+            dot={false}
+          />
+        </ReLineChart>
+      </ResponsiveContainer>
     </div>
   );
 }

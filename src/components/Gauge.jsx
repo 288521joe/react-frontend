@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Gauge({ quality, total, ok, ng }) {
   // sanitize inputs
-  quality = Number(quality) || 0;
-  total = Number(total) || 0;
-  ok = Number(ok) || 0;
-  ng = Number(ng) || 0;
+  quality = Number(quality) || 80;
+  total = Number(total) || 100;
+  ok = Number(ok) || 80;
+  ng = Number(ng) || 20;
 
   const radius = 120;
   const stroke = 22;
@@ -34,10 +34,10 @@ export default function Gauge({ quality, total, ok, ng }) {
   const progress = (anim / 100) * circumference;
 
   return (
-    <div className="grid grid-cols-3 gap-4 mt-4">
+    <div className="grid grid-cols-3 gap-4 mt-4 ">
 
       {/* LEFT: Responsive Gauge */}
-      <div className="border border-gray-300 rounded-xl bg-white p-6 flex flex-col">
+      <div className="border border-gray-300 rounded-xl bg-white p-2 flex flex-col justify-center items-center h-full">
 
         <p className="text-lg font-semibold text-gray-700 mb-2">Quality</p>
 
@@ -81,7 +81,7 @@ export default function Gauge({ quality, total, ok, ng }) {
       </div>
 
       {/* CENTER: Total Count */}
-      <div className="border border-gray-300 rounded-xl bg-white p-6 flex flex-col items-center">
+      <div className="border border-gray-300 rounded-xl bg-white p-2 flex flex-col justify-center items-center">
 
         {/* Total Count (Row 1) */}
         <p className="text-lg font-semibold text-gray-700 mb-2">Total Count</p>
@@ -93,13 +93,13 @@ export default function Gauge({ quality, total, ok, ng }) {
           {/* OK */}
           <div className="flex flex-col items-center">
             <p className="text-lg font-semibold text-gray-700">OK</p>
-            <p className="text-5xl font-bold text-green-600">{ok}</p>
+            <p className="text-6xl font-bold text-green-600">{ok}</p>
           </div>
 
           {/* NG */}
           <div className="flex flex-col items-center">
             <p className="text-lg font-semibold text-gray-700">NG</p>
-            <p className="text-5xl font-bold text-red-600">{ng}</p>
+            <p className="text-6xl font-bold text-red-600">{ng}</p>
           </div>
 
         </div>
@@ -108,18 +108,20 @@ export default function Gauge({ quality, total, ok, ng }) {
 
 
       {/* RIGHT: OK/NG */}
-      <div className="border border-gray-300 rounded-xl bg-white p-6 flex flex-col justify-start">
+      <div className="border border-gray-300 rounded-xl bg-white p-2 flex flex-col justify-center items-center h-full">
 
-        <div className="mb-8">
-          <p className="text-lg font-semibold text-gray-700">OK</p>
-          <p className="text-5xl font-bold text-green-600">{ok}</p>
+        <div className="mb-8 text-center">
+          <p className="text-lg font-semibold text-gray-700">Error parts</p>
+          <p className="text-6xl font-bold text-red-600">{ok}</p>
         </div>
 
-        <div>
+        <div className="text-center">
           <p className="text-lg font-semibold text-gray-700">NG</p>
-          <p className="text-5xl font-bold text-red-600">{ng}</p>
+          <p className="text-6xl font-bold text-black-600">{ng}</p>
         </div>
+
       </div>
+
 
     </div>
   );
