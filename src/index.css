@@ -11,3 +11,11 @@
 .animate-shake {
   animation: shake 0.3s ease-in-out;
 }
+
+:root {
+  --card-bg: #f5f7f9;
+  --card-border: #d3d7dc;
+  --accent-blue: #00a8e8;   /* Industrial cyan */
+  --accent-gray: #6b7b8c;
+  --shadow-soft: 0 2px 6px rgba(0,0,0,0.08);
+}

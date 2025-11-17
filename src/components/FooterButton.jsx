@@ -1,14 +1,19 @@
-export default function FooterButton({ text, color = "blue", onClick }) {
-  const colors = {
-    blue: "bg-blue-500 hover:bg-blue-600",
-    green: "bg-green-500 hover:bg-green-600",
-    orange: "bg-orange-500 hover:bg-orange-600",
-  };
-
+export default function FooterButton({ text, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`${colors[color]} text-white font-bold px-10 py-3 rounded-xl shadow`}
+      className="
+        w-32 h-20 
+        bg-[var(--card-bg)]
+        border border-[var(--card-border)]
+        shadow 
+        rounded-md
+        text-[var(--accent-gray)]
+        font-semibold
+        hover:bg-white
+        hover:shadow-md
+        transition
+      "
     >
       {text}
     </button>

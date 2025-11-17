@@ -28,6 +28,8 @@ export default function App() {
   const [runout2, setRunout2] = useState(0);
   const [status, setStatus] = useState("OK");
 
+  const [diameterMode, setDiameterMode] = useState("two");
+
   const [plcSignal, setPlcSignal] = useState(0);
     useEffect(() => {
     const t = setInterval(() => {
@@ -97,7 +99,8 @@ export default function App() {
 
         {/* CombinedMeasurementRow — takes 3/4 width */}
         <div className="flex-[3] bg-white rounded-xl shadow p-2 flex flex-col">
-          <CombinedMeasurementRow />
+          <CombinedMeasurementRow mode={diameterMode} />
+
         </div>
 
         {/* LotCard — takes 1/4 width, same height because parent is flex */}
@@ -114,6 +117,9 @@ export default function App() {
         onModel={() => setAskPasswordFor("model")}
         onCapability={() => setAskPasswordFor("capability")}
         onResult={() => setAskPasswordFor("result")}
+        onToggleMode={() =>
+          setDiameterMode(m => (m === "two" ? "one" : "two"))
+        }
       />
 
       {/* Password Modal */}

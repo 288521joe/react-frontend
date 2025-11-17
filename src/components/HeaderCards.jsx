@@ -2,7 +2,7 @@ import Card from "./Card";
 
 export default function HeaderCards({ currentModel, plcSignal }) {
   return (
-    <div className="grid grid-cols-5 gap-4">
+    <div className="grid grid-cols-4 gap-4">
 
       {/* Card 1: Machine */}
       <Card title="M/C">
