@@ -2,23 +2,19 @@ import React from "react";
 
 export default function LotCard() {
   return (
-    <div className="w-full h-full border rounded-xl p-3 bg-white shadow-md flex flex-col">
+    <div className="card-surface p-4 rounded-md flex flex-col justify-between h-full">
+      <div>
+        <h4 className="text-lg font-semibold text-[var(--text-dark)]">LOT mark code</h4>
 
-      <div className="text-2xl font-bold mb-2 border p-2 text-center rounded">
-        LOT mark code
+        <div className="mt-4 bg-white border border-[var(--card-border)] rounded-md h-56 flex items-center justify-center text-[var(--text-mid)]">
+          QR code Image
+        </div>
       </div>
 
-      <div className="flex-1 border rounded-xl flex items-center justify-center my-4 bg-gray-100">
-        <p className="text-xl text-gray-700 text-center">
-          QR code <br /> Image
-        </p>
+      <div className="mt-4 flex items-center gap-3">
+        <div className="w-8 h-8 bg-[#f07f2a] rounded-sm"></div>
+        <div className="text-sm text-[var(--text-dark)]">LOT mark Error</div>
       </div>
-
-      <div className="flex items-center mt-3">
-        <div className="w-10 h-10 bg-orange-500 rounded mr-5"></div>
-        <p className="text-lg font-semibold">LOT mark Error</p>
-      </div>
-
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./index.css";
 import Card from "./components/Card";
 import HeaderCards from "./components/HeaderCards";
 import Gauge from "./components/Gauge";
@@ -16,7 +17,6 @@ import CombinedMeasurementRow from "./components/CombinedMeasurementRow";
 import LotCard from "./components/LotCard";
 
 export default function App() {
-
   const [openModel, setOpenModel] = useState(false);
   const [openCapability, setOpenCapability] = useState(false);
   const [openResult, setOpenResult] = useState(false);
@@ -31,32 +31,17 @@ export default function App() {
   const [diameterMode, setDiameterMode] = useState("two");
 
   const [plcSignal, setPlcSignal] = useState(0);
-    useEffect(() => {
+  useEffect(() => {
     const t = setInterval(() => {
-      setPlcSignal((p) => (p ? 0 : 0)); // always 0 → always blinking
+      setPlcSignal((p) => (p ? 0 : 0));
     }, 500);
-
     return () => clearInterval(t);
   }, []);
 
   const navigate = useNavigate();
 
-  const [showErrorList, setShowErrorList] = useState(false);
-
-
   const [askPasswordFor, setAskPasswordFor] = useState(null);
 
-  // Validate pin
-  const checkPassword = async (pin) => {
-    const override = localStorage.getItem("passwordOverride");
-    if (override && pin === override) return true;
-
-    const file = await fetch("/password.txt");
-    const filePass = (await file.text()).trim();
-    return pin === filePass;
-  };
-
-  // Simulated live measurement feed
   useEffect(() => {
     const interval = setInterval(() => {
       const d1 = (28 + Math.random() * 0.3).toFixed(2);
@@ -77,52 +62,36 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 space-y-4">
-
-      {/* First Row */}
+    <div className="min-h-screen bg-[var(--bg)] p-6 space-y-4">
       <HeaderCards currentModel={currentModel} plcSignal={plcSignal} />
 
       <div className="flex gap-4 mt-4">
-        <div className="flex-[3] bg-white rounded-xl p-5 border border-gray-300">
-          <Gauge value={status === "OK" ? 80 : 20} />
+        <div className="flex-[3]">
+          <Gauge value={status === "OK" ? 80 : 20} total={100} ok={80} ng={20} />
         </div>
 
-        <div className="flex-[1] flex">
+        <div className="flex-[1]">
           <StatusBlock status={status} />
         </div>
       </div>
 
-
-
-      {/* Third Row — combined measurement */}
       <div className="flex gap-4 mt-4">
-
-        {/* CombinedMeasurementRow — takes 3/4 width */}
-        <div className="flex-[3] bg-white rounded-xl shadow p-2 flex flex-col">
+        <div className="flex-[3]">
           <CombinedMeasurementRow mode={diameterMode} />
-
         </div>
 
-        {/* LotCard — takes 1/4 width, same height because parent is flex */}
-        <div className="flex-[1] flex">
+        <div className="flex-[1]">
           <LotCard />
         </div>
-
       </div>
 
-
-
-      {/* Footer */}
       <Footer
         onModel={() => setAskPasswordFor("model")}
         onCapability={() => setAskPasswordFor("capability")}
         onResult={() => setAskPasswordFor("result")}
-        onToggleMode={() =>
-          setDiameterMode(m => (m === "two" ? "one" : "two"))
-        }
+        onToggleMode={() => setDiameterMode((m) => (m === "two" ? "one" : "two"))}
       />
 
-      {/* Password Modal */}
       <Modal
         open={
           askPasswordFor === "model" ||
@@ -131,20 +100,17 @@ export default function App() {
         }
         onClose={() => setAskPasswordFor(null)}
       >
-
         <PasswordPrompt
           onSuccess={() => {
             if (askPasswordFor === "model") navigate("/models");
             if (askPasswordFor === "capability") navigate("/capability");
             if (askPasswordFor === "result") navigate("/results");
-
             setAskPasswordFor(null);
           }}
           onClose={() => setAskPasswordFor(null)}
         />
       </Modal>
 
-      {/* Model Modal */}
       <Modal open={openModel} onClose={() => setOpenModel(false)}>
         <ModelList
           onSelect={(model) => {
@@ -154,16 +120,13 @@ export default function App() {
         />
       </Modal>
 
-      {/* Capability Modal */}
       <Modal open={openCapability} onClose={() => setOpenCapability(false)}>
         <CapabilityReport />
       </Modal>
 
-      {/* Result Modal */}
       <Modal open={openResult} onClose={() => setOpenResult(false)}>
         <ResultTable />
       </Modal>
-
     </div>
   );
 }

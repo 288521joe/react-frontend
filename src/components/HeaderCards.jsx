@@ -1,38 +1,32 @@
+import React from "react";
 import Card from "./Card";
 
 export default function HeaderCards({ currentModel, plcSignal }) {
   return (
     <div className="grid grid-cols-4 gap-4">
-
-      {/* Card 1: Machine */}
       <Card title="M/C">
-        IDS-HT-80-2
+        <div className="text-2xl font-semibold text-[var(--text-dark)]">IDS-HT-80-2</div>
       </Card>
 
-      {/* Card 2: Running Model */}
       <Card title="Running Model">
-        {currentModel || "None"}
+        <div className="text-2xl font-semibold text-[var(--text-dark)]">{currentModel || "None"}</div>
       </Card>
 
-      {/* Card 3: Date & Time — NO TITLE */}
-      <div className="bg-white text-1xl p-4 rounded-xl shadow text-center">
-        {new Date().toLocaleDateString()} <br />
-        {new Date().toLocaleTimeString()}
+      <div className="card-surface p-4 flex flex-col items-center justify-center">
+        <div className="text-lg font-semibold text-[var(--text-mid)]">
+          {new Date().toLocaleDateString()}
+        </div>
+        <div className="text-lg font-semibold text-[var(--text-dark)]">
+          {new Date().toLocaleTimeString()}
+        </div>
       </div>
 
-      {/* Card 4: PLC Connection — NO TITLE */}
-      <div className="bg-white p-4 rounded-xl shadow text-center flex flex-col items-center">
-        <div
-          className={`w-8 h-8 rounded-full ${
-            plcSignal ? "bg-green-600" : "bg-red-600"
-          }`}
-        ></div>
-
-        <p className="mt-1 text-sm font-semibold">
+      <div className="card-surface p-4 flex flex-col items-center justify-center">
+        <div className={`w-8 h-8 rounded-full ${plcSignal ? "bg-[var(--ok)]" : "bg-[var(--ng)]"}`}></div>
+        <div className="mt-2 text-sm text-[var(--text-mid)]">
           {plcSignal ? "Connected" : "Disconnected"}
-        </p>
+        </div>
       </div>
-
     </div>
   );
 }

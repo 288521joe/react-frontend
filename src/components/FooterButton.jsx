@@ -1,21 +1,18 @@
-export default function FooterButton({ text, onClick }) {
+import React from "react";
+
+export default function FooterButton({ text, onClick, small = false }) {
+  // square tile style
   return (
     <button
       onClick={onClick}
-      className="
-        w-32 h-20 
-        bg-[var(--card-bg)]
-        border border-[var(--card-border)]
-        shadow 
-        rounded-md
-        text-[var(--accent-gray)]
-        font-semibold
-        hover:bg-white
-        hover:shadow-md
-        transition
-      "
+      className={`footer-tile flex items-center justify-center gap-2 w-36 h-20
+        bg-[var(--card-bg)] border border-[var(--card-border)] rounded-md shadow-lg
+        text-lg font-semibold text-[var(--text-dark)]
+        hover:bg-white transition`}
+      aria-label={text}
+      title={text}
     >
-      {text}
+      <span>{text}</span>
     </button>
   );
 }
